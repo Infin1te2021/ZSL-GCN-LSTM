@@ -65,39 +65,52 @@ gantt
 ### MindMap
 ```mermaid
 mindmap
-  root((HybridNet))
-    GFEM
-    basic unit
-      A((2s-AGCN))
-        B((ST-GCN))
-          {{Edge Set}}
-            [intra-body edges]
-            [inter-frame edges]
-          {{Partition Strategies}}
-            [Uni-labeling <br/>
-            < Kipf and Welling 2017 >]
-            [Distance partitioning]
-            [Spatial configuration partitioning]
-              (root = 0)
-              (centripetal group = 1)
-              (centrifugal group = 2)
-          {{Network architecture}}
-            (dropout = 0.5)
-            (BN layer <br/>
-            3 x 64 Channels <br/>
-            1 x 128 Channels, stride = 2 <br/>
-            2 x 128 Channels <br/>
-            1 x 256 Channels, stride = 2 <br/>
-            2 x 256 Channels <br/>
-            Global Average Pooling <br/>
-            FC <br/>
-            Softmax)
-            (ResNet for each ST-GCN)
-            (SGD)
-            (init_lr = 0.01 <br/>
-            decay_rate = 0.1 for every 10 epochs)
-    gluing unit
-    CFPM
+  root((ZSL-GCN-LSTM))
+    ((HybridNet))
+      GFEM
+      basic unit
+        ((2s-AGCN))
+          ((ST-GCN))
+            {{Edge Set}}
+              [intra-body edges]
+              [inter-frame edges]
+            {{Partition Strategies}}
+              [Uni-labeling <br/>
+              < Kipf and Welling 2017 >]
+              [Distance partitioning]
+              [Spatial configuration partitioning]
+                (root = 0)
+                (centripetal group = 1)
+                (centrifugal group = 2)
+            {{Network architecture}}
+              (dropout = 0.5)
+              (BN layer <br/>
+              3 x 64 Channels <br/>
+              1 x 128 Channels, stride = 2 <br/>
+              2 x 128 Channels <br/>
+              1 x 256 Channels, stride = 2 <br/>
+              2 x 256 Channels <br/>
+              Global Average Pooling <br/>
+              FC <br/>
+              Softmax)
+              (ResNet for each ST-GCN)
+              (SGD)
+              (init_lr = 0.01 <br/>
+              decay_rate = 0.1 for every 10 epochs)
+      gluing unit
+      CFPM
+    ((SMIE))
+      modules
+        Global alignment module
+          Mutual information estimation & maximization
+            Statistical correlations
+              visual
+              semantic distributions
+        Temporal constraint module
+          Connection model
+            Action dynamics exploration
+            Inherent temporal information capture
+    ((AGC-LSTM))
 ```
 
 ### Reference
